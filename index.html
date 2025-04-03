@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abdullah Al Murad | GitHub Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@primer/octicons@latest/build/font/octicons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="theme-toggle" id="themeToggle">
+    <span class="octicon octicon-moon"></span>
+  </div>
+
+  <div class="container">
+    <header class="profile-header">
+      <img src="assets/profile.png" alt="Abdullah Al Murad" class="profile-logo floating">
+      <div class="profile-info">
+        <h1>Abdullah Al Murad</h1>
+        <p class="text-secondary">Computer Science & Engineering Student | AIUB</p>
+        
+        <div class="social-container">
+          <a href="https://github.com/AlMurad409" class="gh-btn gh-btn-primary" target="_blank">
+            <span class="octicon octicon-mark-github"></span> Follow @AlMurad409
+          </a>
+        </div>
+        
+        <div class="skill-bar">
+          <div class="skill-progress" style="width: 85%"></div>
+        </div>
+        <p>JavaScript, Python, C++</p>
+      </div>
+    </header>
+
+    <nav class="gh-nav">
+      <a href="index.html" class="gh-nav-item active">
+        <span class="octicon octicon-home"></span> Overview
+      </a>
+      <a href="projects.html" class="gh-nav-item">
+        <span class="octicon octicon-repo"></span> Projects
+      </a>
+      <a href="education.html" class="gh-nav-item">
+        <span class="octicon octicon-book"></span> Education
+      </a>
+      <a href="achievements.html" class="gh-nav-item">
+        <span class="octicon octicon-trophy"></span> Achievements
+      </a>
+      <a href="about.html" class="gh-nav-item">
+        <span class="octicon octicon-person"></span> About
+      </a>
+      <a href="contact.html" class="gh-nav-item">
+        <span class="octicon octicon-mail"></span> Contact
+      </a>
+    </nav>
+
+    <div class="gh-stats">
+      <div class="stat-item">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Projects</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Awards</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Leadership</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">2</div>
+        <div class="stat-label">Years Exp</div>
+      </div>
+    </div>
+
+    <div class="gh-card">
+      <h2 class="gh-card-title">
+        <span class="octicon octicon-graph"></span>
+        Coding Activity
+      </h2>
+      <div class="contribution-graph" id="contributionGraph"></div>
+      <p style="text-align: center; margin-top: 1rem; color: var(--text-tertiary);">Recent coding activity</p>
+    </div>
+
+    <div class="gh-card">
+      <h2 class="gh-card-title">
+        <span class="octicon octicon-pin"></span>
+        Featured Project
+      </h2>
+      <h3>One App - Emergency Response</h3>
+      <p>A mobile application designed for emergency situations with quick response features and real-time location sharing.</p>
+      <div class="language-tags">
+        <span class="language-tag" style="background: #f1e05a;">JavaScript</span>
+        <span class="language-tag" style="background: #3572A5;">Python</span>
+        <span class="language-tag" style="background: #e34c26;">HTML/CSS</span>
+      </div>
+      <a href="projects.html" class="gh-btn" style="margin-top: 1rem;">
+        <span class="octicon octicon-code"></span> View Projects
+      </a>
+    </div>
+
+    <div class="gh-card">
+      <h2 class="gh-card-title">
+        <span class="octicon octicon-organization"></span>
+        Current Education
+      </h2>
+      <div class="education-item">
+        <h3>American International University-Bangladesh</h3>
+        <p class="text-secondary">Bachelor of Science in Computer Science & Engineering</p>
+        <p>2024 - Present | GPA: 3.8/4.0</p>
+        <div class="skill-bar" style="margin: 0.5rem 0;">
+          <div class="skill-progress" style="width: 90%"></div>
+        </div>
+      </div>
+      <a href="education.html" class="gh-btn">
+        <span class="octicon octicon-history"></span> View Full Education
+      </a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
