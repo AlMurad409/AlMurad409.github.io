@@ -3,58 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdullah Al Murad | Portfolio</title>
+    <title>Abdullah Al Murad - Portfolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <header>
-        <h1>Abdullah Al Murad</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Particle Background -->
+    <div class="particles" id="particles-js"></div>
 
-    <!-- Hero Section -->
-    <section id="hero">
-        <h2>Welcome to My Portfolio</h2>
-        <p>Computer Science Student | Developer | Tech Enthusiast</p>
-    </section>
+    <div class="container">
+        <!-- Profile Logo -->
+        <img src="assets/profile.png" alt="Abdullah Al Murad" class="profile-logo">
 
-    <!-- About Me -->
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hello! I'm <strong>Abdullah Al Murad</strong>, a Computer Science student at AIUB. I have a passion for coding, problem-solving, and working on projects related to software development. I also participate in futsal tournaments and enjoy tech-based activities.</p>
-    </section>
+        <!-- Title -->
+        <h1 class="title">Abdullah Al Murad</h1>
 
-    <!-- Projects -->
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="project">
-            <h3>Standard Calculator (C Programming)</h3>
-            <p>A basic calculator that performs multiple operations at once, developed in C.</p>
+        <!-- Menu -->
+        <div class="menu">
+            <a href="about.html" class="menu-item">About Me</a>
+            <a href="projects.html" class="menu-item">My Projects</a>
+            <a href="education.html" class="menu-item">Education</a>
+            <a href="achievements.html" class="menu-item">Achievements</a>
+            <a href="contact.html" class="menu-item">Contact Me</a>
         </div>
-        <div class="project">
-            <h3>Rocket Launch Simulation</h3>
-            <p>A physics-based final year project simulating rocket launches using C++.</p>
-        </div>
-    </section>
 
-    <!-- Contact & Social Links -->
-    <section id="contact">
-        <h2>Contact</h2>
+        <!-- Social Media Links -->
         <div class="social-container">
-            <a href="https://www.facebook.com/Al.Murad409/" class="social-box">Facebook</a>
-            <a href="https://github.com/AlMurad409" class="social-box">GitHub</a>
-            <a href="https://www.linkedin.com/in/abdullah-al-murad/" class="social-box">LinkedIn</a>
-            <a href="https://500px.com/p/tytmurad" class="social-box">500px</a>
-            <a href="mailto:tyt.murad@gmail.com" class="social-box">Email</a>
+            <a href="https://www.facebook.com/Al.Murad409/" class="social-icon" target="_blank">
+                <img src="assets/social-icons/facebook.png" alt="Facebook">
+            </a>
+            <a href="https://github.com/AlMurad409" class="social-icon" target="_blank">
+                <img src="assets/social-icons/github.png" alt="GitHub">
+            </a>
+            <a href="https://www.linkedin.com/in/abdullah-al-murad/" class="social-icon" target="_blank">
+                <img src="assets/social-icons/linkedin.png" alt="LinkedIn">
+            </a>
+            <a href="https://500px.com/p/tytmurad" class="social-icon" target="_blank">
+                <img src="assets/social-icons/500px.png" alt="500px">
+            </a>
+            <a href="mailto:tyt.murad@gmail.com" class="social-icon">
+                <img src="assets/social-icons/email.png" alt="Email">
+            </a>
         </div>
-    </section>
+    </div>
 
+    <script src="script.js"></script>
 </body>
 </html>
