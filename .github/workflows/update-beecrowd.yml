@@ -1,32 +1,45 @@
 name: Update Beecrowd Stats
 on:
   schedule:
-    - cron: '0 0 * * 0' # Runs every Sunday at midnight UTC
-  workflow_dispatch: # Allows manual triggering
+    - cron: '0 12 * * 0' # Every Sunday at 12:00 UTC
+  workflow_dispatch: # Allow manual runs
 
 jobs:
   update-stats:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write # Needed to commit changes
+
     steps:
       - uses: actions/checkout@v3
-      
+        with:
+          fetch-depth: 0 # Get full history for proper git diff
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      
+          cache: 'pip'
+
       - name: Install dependencies
         run: |
-          python -m pip install requests beautifulsoup4
-          
-      - name: Scrape Beecrowd stats
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4
+
+      - name: Run Beecrowd Scraper
         run: |
           python .github/scripts/scrape_beecrowd.py
-          
+          cat data/beecrowd-stats.json
+
       - name: Commit and push changes
+        if: success()
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
+          
+          # Only commit if there are changes
           git add data/beecrowd-stats.json
-          git commit -m "Automated: Update Beecrowd stats" || echo "No changes to commit"
-          git push
+          git diff --quiet && git diff --cached --quiet || \
+          (git commit -m "Automated: Update Beecrowd stats [skip ci]" && \
+           git push)
