@@ -3,7 +3,9 @@ const themeToggle = document.getElementById("themeToggle");
 const setTheme = (isDark) => {
   document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
   localStorage.setItem("theme", isDark ? "dark" : "light");
-  themeToggle.innerHTML = isDark ? '<span class="octicon octicon-sun"></span>' : '<span class="octicon octicon-moon"></span>';
+  themeToggle.innerHTML = isDark 
+    ? '<span class="octicon octicon-sun"></span><span class="theme-text">Theme</span>' 
+    : '<span class="octicon octicon-moon"></span><span class="theme-text">Theme</span>';
 };
 
 themeToggle.addEventListener("click", () => {
@@ -59,6 +61,53 @@ if (contributionGraph) {
   contributionGraph.innerHTML = html;
 }
 
+// Beecrowd Stats Loader
+async function loadBeecrowdStats() {
+  try {
+    const response = await fetch('data/beecrowd-stats.json');
+    if (!response.ok) throw new Error("Failed to fetch stats");
+    
+    const data = await response.json();
+    
+    document.getElementById('beecrowd-stats').innerHTML = `
+      <div class="stat-item">
+        <div class="stat-number">${data.rank || '--'}</div>
+        <div class="stat-label">Global Rank</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">${data.solved || '--'}</div>
+        <div class="stat-label">Problems Solved</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">${data.points || '--'}</div>
+        <div class="stat-label">Points</div>
+      </div>
+    `;
+    
+    if (data.last_updated) {
+      document.getElementById('beecrowd-updated').textContent = 
+        `Updated: ${data.last_updated}`;
+    }
+  } catch (error) {
+    console.error("Error loading Beecrowd stats:", error);
+    document.getElementById('beecrowd-stats').innerHTML = `
+      <div class="stat-item">
+        <div class="stat-number">--</div>
+        <div class="stat-label">Global Rank</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">--</div>
+        <div class="stat-label">Problems Solved</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">--</div>
+        <div class="stat-label">Points</div>
+      </div>
+    `;
+    document.getElementById('beecrowd-updated').textContent = "Failed to load stats";
+  }
+}
+
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener("click", function(e) {
@@ -73,8 +122,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Add floating animation to profile logo
-const profileLogo = document.querySelector(".profile-logo");
-if (profileLogo) {
-  profileLogo.classList.add("floating");
-}
+// Initialize everything when page loads
+document.addEventListener('DOMContentLoaded', () => {
+  loadBeecrowdStats();
+  
+  // Add floating animation to profile logo
+  const profileLogo = document.querySelector(".profile-logo");
+  if (profileLogo) {
+    profileLogo.classList.add("floating");
+  }
+});
