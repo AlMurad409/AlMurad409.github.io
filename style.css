@@ -86,4 +86,76 @@
 
 /* Glow Effect */
 @keyframes glow {
-  0% { box-shadow: 0 0 5px rgba(88, 166, 255, 0.
+  0% { box-shadow: 0 0 5px rgba(88, 166, 255, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(88, 166, 255, 0.8); }
+  100% { box-shadow: 0 0 5px rgba(88, 166, 255, 0.5); }
+}
+
+.gh-btn-primary {
+  animation: glow 2s infinite;
+  background-color: var(--gh-accent);
+  color: white !important;
+  font-weight: 600;
+}
+
+/* GitHub Contribution Graph Style */
+.contribution-graph {
+  display: grid;
+  grid-template-columns: repeat(52, 1fr);
+  gap: 4px;
+  margin: 2rem 0;
+}
+
+.contribution-day {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background-color: var(--gh-bg-light);
+  transition: all 0.2s ease;
+}
+
+.contribution-day:hover {
+  transform: scale(1.5);
+  z-index: 1;
+}
+
+/* Skill Bars */
+.skill-bar {
+  height: 8px;
+  background-color: var(--gh-bg-light);
+  border-radius: 4px;
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+.skill-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #238636, #58a6ff);
+  border-radius: 4px;
+  transition: width 1s ease;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.floating {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Responsive Enhancements */
+@media (min-width: 768px) {
+  .profile-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 3rem;
+  }
+  
+  .gh-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
