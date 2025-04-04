@@ -65,24 +65,57 @@ if (contributionGraph) {
 async function loadBeecrowdStats() {
   try {
     const response = await fetch('data/beecrowd-stats.json');
-    if (!response.ok) throw new Error("Failed to fetch stats");
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     
     const data = await response.json();
     
-    document.getElementById('beecrowd-stats').innerHTML = `
-      <div class="stat-item">
-        <div class="stat-number">${data.rank || '--'}</div>
-        <div class="stat-label">Global Rank</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">${data.solved || '--'}</div>
-        <div class="stat-label">Problems Solved</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">${data.points || '--'}</div>
-        <div class="stat-label">Points</div>
-      </div>
-    `;
+    // Update UI only if we have valid numbers
+    if (data.rank && data.solved && data.points) {
+      document.getElementById('beecrowd-stats').innerHTML = `
+        <div class="stat-item">
+          <div class="stat-number">${data.rank}</div>
+          <div class="stat-label">Global Rank</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">${data.solved}</div>
+          <div class="stat-label">Problems Solved</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">${data.points}</div>
+          <div class="stat-label">Points</div>
+        </div>
+      `;
+      document.getElementById('beecrowd-updated').textContent = 
+        `Updated: ${data.last_updated || 'Unknown'}`;
+    } else {
+      showManualStats();
+    }
+  } catch (error) {
+    console.error("Error loading Beecrowd stats:", error);
+    showManualStats();
+  }
+}
+
+function showManualStats() {
+  document.getElementById('beecrowd-stats').innerHTML = `
+    <div class="stat-item">
+      <div class="stat-number">150</div> <!-- Your actual solved count -->
+      <div class="stat-label">Problems Solved</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">1250</div> <!-- Your actual points -->
+      <div class="stat-label">Points</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">12,345</div> <!-- Your actual rank -->
+      <div class="stat-label">Global Rank</div>
+    </div>
+  `;
+  document.getElementById('beecrowd-updated').textContent = "Using manual stats";
+}
+
+// Call this when page loads
+document.addEventListener('DOMContentLoaded', loadBeecrowdStats);
     
     if (data.last_updated) {
       document.getElementById('beecrowd-updated').textContent = 
