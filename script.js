@@ -67,10 +67,7 @@ async function loadBeecrowdStats() {
   if (!card) return;
 
   try {
-    // Show loading state
     card.classList.add('loading');
-    
-    // Fetch with cache busting
     const response = await fetch('data/beecrowd-stats.json?t=' + new Date().getTime());
     
     if (!response.ok) {
@@ -79,12 +76,10 @@ async function loadBeecrowdStats() {
 
     const data = await response.json();
     
-    // Update stats
     document.getElementById('beecrowd-rank').textContent = data.rank || '--';
     document.getElementById('beecrowd-solved').textContent = data.solved || '--';
     document.getElementById('beecrowd-points').textContent = data.points || '--';
     
-    // Update timestamp
     const updatedElement = document.getElementById('beecrowd-updated');
     if (data.last_updated) {
       updatedElement.textContent = `Updated: ${new Date(data.last_updated).toLocaleString()}`;
@@ -94,7 +89,6 @@ async function loadBeecrowdStats() {
     
   } catch (error) {
     console.error('Failed to load Beecrowd stats:', error);
-    // Fallback to manual stats (replace with your actual numbers)
     document.getElementById('beecrowd-rank').textContent = '12,345';
     document.getElementById('beecrowd-solved').textContent = '150';
     document.getElementById('beecrowd-points').textContent = '1,250';
