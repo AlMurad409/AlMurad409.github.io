@@ -38,6 +38,9 @@ body {
   color: var(--text-primary);
   line-height: 1.5;
   transition: var(--transition);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Layout & Containers */
@@ -45,6 +48,7 @@ body {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1.5rem;
+  flex: 1;
 }
 
 .profile-header {
@@ -245,7 +249,7 @@ p {
   padding-bottom: 0;
 }
 
-/* Content Box (for about, projects, etc.) */
+/* Content Box */
 .content-box {
   background-color: var(--bg-secondary);
   border: 1px solid var(--border);
@@ -263,35 +267,7 @@ p {
 .content-box p {
   margin-bottom: 0.75rem;
 }
-/* Beecrowd Card Styles */
-#beecrowd-card {
-  transition: all 0.3s ease;
-}
 
-#beecrowd-card.loading {
-  opacity: 0.8;
-  position: relative;
-}
-
-#beecrowd-card.loading::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(130, 80, 223, 0.1);
-  z-index: 1;
-  border-radius: 12px;
-}
-
-.update-time {
-  font-size: 0.7rem;
-  color: var(--text-tertiary);
-  margin-left: 0.5rem;
-  font-weight: normal;
-  display: inline-block;
-}
 /* Back Button */
 .back-button {
   display: inline-flex;
@@ -393,35 +369,12 @@ p {
   100% { transform: translateY(0px); }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .profile-header {
-    padding: 2rem 0 1rem;
-  }
-  
-  .gh-nav {
-    flex-direction: column;
-    gap: 0.25rem;
-    padding: 0.5rem;
-  }
-  
-  .gh-nav-item {
-    justify-content: center;
-  }
-  
-  .gh-stats {
-    grid-template-columns: 1fr 1fr;
-  }
-  
-  .gh-card {
-    padding: 1.5rem;
-  }
-  /* Footer Styles */
+/* Footer Styles */
 .site-footer {
   background-color: var(--bg-tertiary);
   border-top: 1px solid var(--border);
   padding: 2rem 0;
-  margin-top: 3rem;
+  margin-top: auto;
   color: var(--text-secondary);
 }
 
@@ -458,13 +411,6 @@ p {
 
 .site-footer .octicon-heart {
   color: #ff4d4d;
-}
-
-@media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-    text-align: center;
-  }
 }
 
 /* Projects Page Styles */
@@ -589,95 +535,28 @@ p {
   font-size: 0.9rem;
 }
 
-/* Project Modal */
-.project-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  width: 90%;
-  max-width: 800px;
-  padding: 2rem;
-  position: relative;
-  max-height: 80vh;
-  overflow-y: auto;
-}
-
-.close-modal {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  color: var(--text-secondary);
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.modal-category {
-  display: inline-block;
-  background: var(--accent);
-  color: white;
-  padding: 0.25rem 1rem;
-  border-radius: 2rem;
-  margin: 0.5rem 0 1.5rem;
-  font-size: 0.9rem;
-}
-
-.modal-body {
-  line-height: 1.6;
-}
-
-.modal-date {
-  color: var(--text-tertiary);
-  font-size: 0.9rem;
-  margin-top: 1.5rem;
-  display: block;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .projects-grid {
-      grid-template-columns: 1fr;
-  }
-  
-  .modal-content {
-      width: 95%;
-      padding: 1.5rem;
-  }
-}
-
 /* Contact Page Styles */
 .contact-intro {
   text-align: center;
   margin-bottom: 2rem;
   color: var(--text-secondary);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .social-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
 }
 
 .social-tile {
   background: var(--bg-secondary);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.5rem 1rem;
+  border-radius: 16px;
+  padding: 2rem 1rem;
   text-align: center;
   text-decoration: none;
   color: var(--text-primary);
@@ -693,56 +572,123 @@ p {
   left: -2px;
   right: -2px;
   bottom: -2px;
-  border-radius: 14px;
-  background: linear-gradient(45deg, 
-      var(--accent), 
-      rgba(130, 80, 223, 0.5), 
-      var(--accent));
+  border-radius: 18px;
+  background: linear-gradient(135deg, 
+      rgba(130, 80, 223, 0.8) 0%, 
+      rgba(130, 80, 223, 0.4) 50%, 
+      rgba(130, 80, 223, 0.8) 100%);
   z-index: -1;
   opacity: 0.7;
   transition: all 0.3s ease;
 }
 
 .social-tile:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(130, 80, 223, 0.2);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(130, 80, 223, 0.35);
 }
 
 .social-tile:hover::before {
   opacity: 1;
-  animation: glow 2s infinite alternate;
+  animation: glow-pulse 2s infinite ease-in-out;
 }
 
 .social-icon {
-  font-size: 2rem;
-  margin-bottom: 0.75rem;
+  font-size: 2.5rem;
+  margin-bottom: 1.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background: rgba(130, 80, 223, 0.1);
+  transition: all 0.3s ease;
+}
+
+.social-tile:hover .social-icon {
+  background: rgba(130, 80, 223, 0.2);
+  transform: scale(1.1);
 }
 
 .social-icon img {
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
   object-fit: contain;
 }
 
 .social-name {
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.social-handle {
+  color: var(--text-secondary);
   font-size: 0.9rem;
+  margin-top: 0.25rem;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .profile-header {
+    padding: 2rem 0 1rem;
+  }
+  
+  .gh-nav {
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.5rem;
+  }
+  
+  .gh-nav-item {
+    justify-content: center;
+  }
+  
+  .gh-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .gh-card {
+    padding: 1.5rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
   .social-grid {
-      grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .social-grid {
-      grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-intro {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
   }
 }
+
+/* Ensure particles background scales properly */
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* Better category buttons for large screens */
+@media (min-width: 1600px) {
+  .project-categories {
+    margin: 3rem 0;
+  }
+  
+  .category-btn {
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+  }
 }
