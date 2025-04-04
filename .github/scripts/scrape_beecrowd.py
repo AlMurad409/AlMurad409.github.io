@@ -1,19 +1,16 @@
-import os
 import json
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
 from pathlib import Path
 
-# Configure paths
-SCRIPT_DIR = Path(__file__).parent
-REPO_ROOT = SCRIPT_DIR.parent.parent
-DATA_FILE = REPO_ROOT / "data" / "beecrowd-stats.json"
+# Configuration
 PROFILE_ID = "1071849"
 USER_AGENT = "Mozilla/5.0 (GitHub Action; Beecrowd-Stats-Scraper/1.0)"
+DATA_FILE = Path(__file__).parent.parent.parent / "data" / "beecrowd-stats.json"
 
 def ensure_data_file():
-    """Ensure data directory and file exist"""
+    """Ensure data directory and file exist with valid structure"""
     DATA_FILE.parent.mkdir(exist_ok=True)
     if not DATA_FILE.exists():
         with open(DATA_FILE, 'w') as f:
@@ -25,57 +22,58 @@ def ensure_data_file():
                 "status": "Initialized"
             }, f, indent=2)
 
-def clean_text(text):
-    """Clean and normalize scraped text"""
+def clean_stat(text):
+    """Clean and normalize statistic values"""
     if not text:
         return "--"
-    text = ' '.join(text.split()).strip()
-    return text.split(':')[-1].strip() if ':' in text else text
+    return ''.join(c for c in text if c.isdigit() or c in {'.', ','})
 
-def scrape_beecrowd():
+def scrape_profile():
+    """Scrape Beecrowd profile and return stats"""
+    url = f"https://www.beecrowd.com.br/judge/en/profile/{PROFILE_ID}"
+    try:
+        response = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=15)
+        response.raise_for_status()
+        
+        soup = BeautifulSoup(response.text, 'html.parser')
+        stats_container = soup.find('ul', class_='information') or soup.find('div', class_='pb-information')
+        
+        if stats_container:
+            items = stats_container.find_all('li')
+            if len(items) >= 3:
+                return {
+                    "rank": clean_stat(items[0].get_text()),
+                    "solved": clean_stat(items[1].get_text()),
+                    "points": clean_stat(items[2].get_text())
+                }
+        return {}
+    except Exception as e:
+        print(f"Scraping error: {str(e)}")
+        return {}
+
+def update_stats():
+    """Update statistics file"""
     ensure_data_file()
     
-    stats = {
-        "rank": "--",
-        "solved": "--",
-        "points": "--",
-        "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "status": "success"
-    }
-
-    try:
-        url = f"https://www.beecrowd.com.br/judge/en/profile/1071849"
-        response = requests.get(
-            url,
-            headers={"User-Agent": USER_AGENT},
-            timeout=15
-        )
-        response.raise_for_status()
-
-        soup = BeautifulSoup(response.text, 'html.parser')
-        info_sections = soup.select('ul.information') or soup.select('div.pb-information ul')
-        
-        if info_sections:
-            items = info_sections[0].select('li')
-            if len(items) >= 3:
-                stats.update({
-                    "rank": clean_text(items[0].get_text()),
-                    "solved": clean_text(items[1].get_text()),
-                    "points": clean_text(items[2].get_text())
-                })
-
-    except requests.RequestException as e:
-        stats["status"] = f"Request failed: {str(e)}"
-        print(stats["status"])
-    except Exception as e:
-        stats["status"] = f"Error: {str(e)}"
-        print(stats["status"])
-    finally:
-        with open(DATA_FILE, 'w') as f:
-            json.dump(stats, f, indent=2)
-        return stats
+    # Load existing data first
+    with open(DATA_FILE, 'r') as f:
+        data = json.load(f)
+    
+    # Merge with new stats
+    new_stats = scrape_profile()
+    if new_stats:
+        data.update(new_stats)
+        data['last_updated'] = datetime.now().isoformat()
+        data['status'] = "Success"
+    else:
+        data['status'] = "Failed to scrape new data"
+    
+    # Save updated data
+    with open(DATA_FILE, 'w') as f:
+        json.dump(data, f, indent=2)
+    
+    return data
 
 if __name__ == "__main__":
-    result = scrape_beecrowd()
-    print(f"Scraping completed: {result['status']}")
-    print("Current stats:", json.dumps(result, indent=2))
+    result = update_stats()
+    print(json.dumps(result, indent=2))
