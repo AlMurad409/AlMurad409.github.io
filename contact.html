@@ -6,6 +6,178 @@
     <title>Contact - Abdullah Al Murad</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/@primer/octicons@latest/build/font/octicons.css">
+    <style>
+        /* Enhanced Contact Page Styles */
+        .contact-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .social-tile {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 2rem 1rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .social-tile::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, 
+                rgba(130, 80, 223, 0.8) 0%, 
+                rgba(130, 80, 223, 0.4) 50%, 
+                rgba(130, 80, 223, 0.8) 100%);
+            z-index: -1;
+            opacity: 0.7;
+            transition: all 0.4s ease;
+        }
+
+        .social-tile::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 16px;
+            background: linear-gradient(
+                to bottom right,
+                transparent 0%,
+                rgba(130, 80, 223, 0.1) 100%
+            );
+            z-index: -1;
+        }
+
+        .social-tile:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(130, 80, 223, 0.35);
+        }
+
+        .social-tile:hover::before {
+            opacity: 1;
+            animation: glow-pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes glow-pulse {
+            0% { box-shadow: 0 0 15px -5px var(--accent); }
+            50% { box-shadow: 0 0 25px 5px rgba(130, 80, 223, 0.6); }
+            100% { box-shadow: 0 0 15px -5px var(--accent); }
+        }
+
+        .social-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            background: rgba(130, 80, 223, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-tile:hover .social-icon {
+            background: rgba(130, 80, 223, 0.2);
+            transform: scale(1.1);
+        }
+
+        .social-icon img {
+            height: 30px;
+            width: 30px;
+            object-fit: contain;
+        }
+
+        .social-name {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Back Button Enhancement */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.8rem 1.8rem;
+            margin: 3rem 0 2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(130, 80, 223, 0.4);
+        }
+
+        /* Responsive Adjustments */
+        @media (min-width: 1600px) {
+            .social-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 2.5rem;
+            }
+            
+            .social-tile {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .social-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .social-tile {
+                padding: 1.5rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-intro {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="particles" id="particles-js"></div>
@@ -15,23 +187,25 @@
         <h1 class="title">Contact Me</h1>
         
         <div class="content-box">
-            <p class="contact-intro">Feel free to reach out for collaborations or opportunities</p>
+            <p class="contact-intro">Feel free to reach out for collaborations or opportunities. I'm always open to discussing new projects and ideas.</p>
             
             <div class="social-grid">
                 <!-- Email -->
                 <a href="mailto:tyt.murad@gmail.com" class="social-tile" target="_blank" rel="noopener noreferrer">
                     <div class="social-icon">
-                        <span class="octicon octicon-mail"></span>
+                        <img src="assets/social-icons/email.png" alt="email">
                     </div>
                     <div class="social-name">Email</div>
+                    <div class="social-handle">tyt.murad@gmail.com</div>
                 </a>
                 
                 <!-- GitHub -->
                 <a href="https://github.com/AlMurad409" class="social-tile" target="_blank" rel="noopener noreferrer">
                     <div class="social-icon">
-                        <span class="octicon octicon-mark-github"></span>
+                        <img src="assets/social-icons/github.png" alt="github">
                     </div>
                     <div class="social-name">GitHub</div>
+                    <div class="social-handle">@AlMurad409</div>
                 </a>
                 
                 <!-- LinkedIn -->
@@ -40,6 +214,7 @@
                         <img src="assets/social-icons/linkedin.png" alt="LinkedIn">
                     </div>
                     <div class="social-name">LinkedIn</div>
+                    <div class="social-handle">abdullah-al-murad</div>
                 </a>
                 
                 <!-- Facebook -->
@@ -48,6 +223,7 @@
                         <img src="assets/social-icons/facebook.png" alt="Facebook">
                     </div>
                     <div class="social-name">Facebook</div>
+                    <div class="social-handle">Al.Murad409</div>
                 </a>
                 
                 <!-- 500px -->
@@ -56,11 +232,14 @@
                         <img src="assets/social-icons/500px.png" alt="500px">
                     </div>
                     <div class="social-name">500px</div>
+                    <div class="social-handle">tytmurad</div>
                 </a>
             </div>
         </div>
         
-        <a href="index.html" class="back-button">Back to Home</a>
+        <a href="index.html" class="back-button">
+            <span class="octicon octicon-chevron-left"></span> Back to Home
+        </a>
     </div>
 
     <footer class="site-footer">
@@ -83,6 +262,16 @@
     <script>
         // Update copyright year
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Add hover effects to social tiles
+        document.querySelectorAll('.social-tile').forEach(tile => {
+            tile.addEventListener('mouseenter', function() {
+                this.querySelector('.social-icon').style.transform = 'scale(1.1)';
+            });
+            tile.addEventListener('mouseleave', function() {
+                this.querySelector('.social-icon').style.transform = 'scale(1)';
+            });
+        });
     </script>
 </body>
 </html>
