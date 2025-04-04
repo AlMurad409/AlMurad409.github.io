@@ -61,7 +61,6 @@ if (contributionGraph) {
   contributionGraph.innerHTML = html;
 }
 
-// Beecrowd Stats Loader
 // Enhanced Beecrowd Stats Loader
 async function loadBeecrowdStats() {
   const card = document.getElementById('beecrowd-card');
@@ -102,36 +101,6 @@ async function loadBeecrowdStats() {
     document.getElementById('beecrowd-updated').textContent = "Using cached data";
   } finally {
     card.classList.remove('loading');
-  }
-}
-
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', loadBeecrowdStats);
-
-// Call this when page loads
-document.addEventListener('DOMContentLoaded', loadBeecrowdStats);
-    
-    if (data.last_updated) {
-      document.getElementById('beecrowd-updated').textContent = 
-        `Updated: ${data.last_updated}`;
-    }
-  } catch (error) {
-    console.error("Error loading Beecrowd stats:", error);
-    document.getElementById('beecrowd-stats').innerHTML = `
-      <div class="stat-item">
-        <div class="stat-number">--</div>
-        <div class="stat-label">Global Rank</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">--</div>
-        <div class="stat-label">Problems Solved</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">--</div>
-        <div class="stat-label">Points</div>
-      </div>
-    `;
-    document.getElementById('beecrowd-updated').textContent = "Failed to load stats";
   }
 }
 
