@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Abdullah Al Murad</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/@primer/octicons@latest/build/font/octicons.css">
 </head>
 <body>
     <div class="particles" id="particles-js"></div>
@@ -13,28 +14,48 @@
         <img src="assets/profile.png" alt="Abdullah Al Murad" class="profile-logo">
         <h1 class="title">Contact Me</h1>
         
-        <div class="content-box" style="text-align: center;">
-            <div style="margin-bottom: 1.5rem;">
-                <p>Feel free to reach out for collaborations or opportunities</p>
-            </div>
+        <div class="content-box">
+            <p class="contact-intro">Feel free to reach out for collaborations or opportunities</p>
             
-            <div class="education-item">
-                <h3>Email</h3>
-                <p><a href="mailto:tyt.murad@gmail.com">tyt.murad@gmail.com</a></p>
-            </div>
-            
-            <div class="social-container" style="margin-top: 1.5rem;">
-                <a href="https://www.facebook.com/Al.Murad409/" class="social-icon" target="_blank">
-                    <img src="assets/social-icons/facebook.png" alt="Facebook">
+            <div class="social-grid">
+                <!-- Email -->
+                <a href="mailto:tyt.murad@gmail.com" class="social-tile" target="_blank" rel="noopener noreferrer">
+                    <div class="social-icon">
+                        <span class="octicon octicon-mail"></span>
+                    </div>
+                    <div class="social-name">Email</div>
                 </a>
-                <a href="https://github.com/AlMurad409" class="social-icon" target="_blank">
-                    <img src="assets/social-icons/github.png" alt="GitHub">
+                
+                <!-- GitHub -->
+                <a href="https://github.com/AlMurad409" class="social-tile" target="_blank" rel="noopener noreferrer">
+                    <div class="social-icon">
+                        <span class="octicon octicon-mark-github"></span>
+                    </div>
+                    <div class="social-name">GitHub</div>
                 </a>
-                <a href="https://www.linkedin.com/in/abdullah-al-murad/" class="social-icon" target="_blank">
-                    <img src="assets/social-icons/linkedin.png" alt="LinkedIn">
+                
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/abdullah-al-murad/" class="social-tile" target="_blank" rel="noopener noreferrer">
+                    <div class="social-icon">
+                        <img src="assets/social-icons/linkedin.png" alt="LinkedIn">
+                    </div>
+                    <div class="social-name">LinkedIn</div>
                 </a>
-                <a href="https://500px.com/p/tytmurad" class="social-icon" target="_blank">
-                    <img src="assets/social-icons/500px.png" alt="500px">
+                
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/Al.Murad409/" class="social-tile" target="_blank" rel="noopener noreferrer">
+                    <div class="social-icon">
+                        <img src="assets/social-icons/facebook.png" alt="Facebook">
+                    </div>
+                    <div class="social-name">Facebook</div>
+                </a>
+                
+                <!-- 500px -->
+                <a href="https://500px.com/p/tytmurad" class="social-tile" target="_blank" rel="noopener noreferrer">
+                    <div class="social-icon">
+                        <img src="assets/social-icons/500px.png" alt="500px">
+                    </div>
+                    <div class="social-name">500px</div>
                 </a>
             </div>
         </div>
@@ -42,6 +63,26 @@
         <a href="index.html" class="back-button">Back to Home</a>
     </div>
 
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <p>&copy; <span id="current-year"></span> Abdullah Al Murad. All rights reserved.</p>
+            </div>
+            <div class="footer-section">
+                <p>Built with <span class="octicon octicon-heart"></span> and GitHub Pages</p>
+            </div>
+            <div class="footer-section">
+                <a href="https://github.com/AlMurad409/AlMurad409.github.io" target="_blank" rel="noopener noreferrer">
+                    <span class="octicon octicon-mark-github"></span> View Source
+                </a>
+            </div>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
+    <script>
+        // Update copyright year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
