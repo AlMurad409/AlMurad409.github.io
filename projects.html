@@ -6,6 +6,281 @@
     <title>Projects - Abdullah Al Murad</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/@primer/octicons@latest/build/font/octicons.css">
+    <style>
+        /* Enhanced Project Grid System */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        /* Project Card - Neon Purple Enhanced */
+        .project-card {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 1.75rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            min-height: 240px;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, 
+                rgba(130, 80, 223, 0.8) 0%, 
+                rgba(130, 80, 223, 0.4) 50%, 
+                rgba(130, 80, 223, 0.8) 100%);
+            z-index: -1;
+            opacity: 0.7;
+            transition: all 0.4s ease;
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 16px;
+            background: linear-gradient(
+                to bottom right,
+                transparent 0%,
+                rgba(130, 80, 223, 0.1) 100%
+            );
+            z-index: -1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(130, 80, 223, 0.35);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+            animation: glow-pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes glow-pulse {
+            0% { box-shadow: 0 0 15px -5px var(--accent); }
+            50% { box-shadow: 0 0 25px 5px rgba(130, 80, 223, 0.6); }
+            100% { box-shadow: 0 0 15px -5px var(--accent); }
+        }
+
+        /* Category Filter Buttons */
+        .project-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0 3rem;
+        }
+
+        .category-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.6rem 1.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .category-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(130, 80, 223, 0.4);
+        }
+
+        /* Project Card Content */
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.25rem;
+        }
+
+        .project-badge {
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .project-content {
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.25rem;
+        }
+
+        .tech-tag {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .project-footer {
+            display: flex;
+            gap: 1rem;
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+            align-items: center;
+        }
+
+        /* Project Modal */
+        .project-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 800px;
+            padding: 2.5rem;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+        }
+
+        .modal-category {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.8rem 0 1.8rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .modal-body {
+            line-height: 1.7;
+        }
+
+        .modal-body .project-tech {
+            margin-top: 1.5rem;
+        }
+
+        .modal-date {
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            display: block;
+        }
+
+        /* Responsive Adjustments */
+        @media (min-width: 1600px) {
+            .container {
+                max-width: 1500px;
+                padding: 0 4rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+                gap: 2.5rem;
+            }
+            
+            .project-card {
+                padding: 2rem;
+                min-height: 260px;
+            }
+            
+            .modal-content {
+                max-width: 900px;
+                padding: 3rem;
+            }
+        }
+
+        @media (min-width: 2000px) {
+            .container {
+                max-width: 1800px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+                gap: 3rem;
+            }
+            
+            html {
+                font-size: 18px;
+            }
+            
+            .project-card {
+                min-height: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="particles" id="particles-js"></div>
@@ -114,54 +389,111 @@
 
     <script src="script.js"></script>
     <script>
-        // Project filtering functionality
+        // Enhanced project filtering with smooth transitions
         document.querySelectorAll('.category-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', function() {
+                // Update active button
                 document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
+                this.classList.add('active');
                 
-                const category = btn.dataset.category;
-                document.querySelectorAll('.project-card').forEach(card => {
-                    if (category === 'all' || card.classList.contains(category)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+                const category = this.dataset.category;
+                const grid = document.querySelector('.projects-grid');
+                const cards = document.querySelectorAll('.project-card');
+                
+                // Apply fade transition
+                grid.style.opacity = '0.5';
+                grid.style.transition = 'opacity 0.3s ease';
+                
+                setTimeout(() => {
+                    cards.forEach(card => {
+                        if (category === 'all' || card.classList.contains(category)) {
+                            card.style.display = 'flex';
+                            card.style.animation = 'fadeIn 0.5s ease forwards';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    grid.style.opacity = '1';
+                }, 300);
             });
         });
 
-        // Project modal functionality
+        // Enhanced modal functionality
         document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('click', () => {
+            card.addEventListener('click', function() {
                 const modal = document.getElementById('projectModal');
-                const title = card.querySelector('h3').textContent;
-                const category = card.querySelector('.project-badge').textContent;
-                const content = card.querySelector('.project-content').innerHTML;
-                const date = card.querySelector('.project-footer').textContent;
+                const title = this.querySelector('h3').textContent;
+                const category = this.querySelector('.project-badge').textContent;
+                const content = this.querySelector('.project-content').innerHTML;
+                const date = this.querySelector('.project-footer').textContent;
                 
                 document.getElementById('modal-title').textContent = title;
                 document.getElementById('modal-category').textContent = category;
                 document.getElementById('modal-body').innerHTML = content;
                 document.getElementById('modal-date').textContent = date;
                 
+                // Animate modal appearance
                 modal.style.display = 'flex';
+                setTimeout(() => {
+                    modal.style.opacity = '1';
+                    document.querySelector('.modal-content').style.transform = 'translateY(0)';
+                }, 10);
             });
         });
 
-        document.querySelector('.close-modal').addEventListener('click', () => {
-            document.getElementById('projectModal').style.display = 'none';
+        // Modal close handlers with animation
+        document.querySelector('.close-modal').addEventListener('click', function() {
+            const modal = document.getElementById('projectModal');
+            modal.style.opacity = '0';
+            document.querySelector('.modal-content').style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
         });
 
         // Close modal when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === document.getElementById('projectModal')) {
-                document.getElementById('projectModal').style.display = 'none';
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('projectModal');
+            if (e.target === modal) {
+                modal.style.opacity = '0';
+                document.querySelector('.modal-content').style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 300);
             }
         });
 
         // Update copyright year
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Dynamic layout adjustments for very large screens
+        function adjustLayout() {
+            const screenWidth = window.innerWidth;
+            const container = document.querySelector('.container');
+            const grid = document.querySelector('.projects-grid');
+            
+            if (screenWidth > 2000) {
+                container.style.maxWidth = '2000px';
+                grid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(420px, 1fr))';
+            } else if (screenWidth > 1600) {
+                container.style.maxWidth = '1600px';
+                grid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(380px, 1fr))';
+            }
+        }
+        
+        // Initialize and watch for resize
+        window.addEventListener('load', adjustLayout);
+        window.addEventListener('resize', adjustLayout);
+
+        // Add animation keyframes dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
