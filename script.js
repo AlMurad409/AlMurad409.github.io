@@ -118,6 +118,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+// Update copyright year automatically
+document.getElementById('current-year').textContent = new Date().getFullYear();
+
 // Initialize everything when page loads
 document.addEventListener('DOMContentLoaded', () => {
   loadBeecrowdStats();
