@@ -102,19 +102,34 @@
       </a>
     </div>
 
-    <div class="gh-card">
-      <h2 class="gh-card-title">
-        <span class="octicon octicon-code"></span>
-        Beecrowd Profile
-        <small id="beecrowd-updated" style="font-size: 0.7rem; color: var(--text-tertiary);"></small>
-      </h2>
-      <div id="beecrowd-stats" class="beecrowd-stats">
-        <!-- Will be populated by JavaScript -->
-      </div>
-      <a href="https://www.beecrowd.com.br/judge/en/profile/1071849" class="gh-btn" style="margin-top: 1rem;" target="_blank">
-        <span class="octicon octicon-link-external"></span> View Live Profile
-      </a>
+    <div class="gh-card" id="beecrowd-card">
+  <h2 class="gh-card-title">
+    <span class="octicon octicon-code"></span>
+    Beecrowd Profile
+    <small id="beecrowd-updated" class="update-time"></small>
+  </h2>
+  <div id="beecrowd-stats" class="beecrowd-stats">
+    <div class="stat-item">
+      <div class="stat-number" id="beecrowd-rank">--</div>
+      <div class="stat-label">Global Rank</div>
     </div>
+    <div class="stat-item">
+      <div class="stat-number" id="beecrowd-solved">--</div>
+      <div class="stat-label">Problems Solved</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" id="beecrowd-points">--</div>
+      <div class="stat-label">Points</div>
+    </div>
+  </div>
+  <a href="https://www.beecrowd.com.br/judge/en/profile/1071849" 
+     class="gh-btn" 
+     style="margin-top: 1rem;" 
+     target="_blank"
+     rel="noopener noreferrer">
+    <span class="octicon octicon-link-external"></span> View Live Profile
+  </a>
+</div>
 
     <div class="gh-card">
       <h2 class="gh-card-title">
