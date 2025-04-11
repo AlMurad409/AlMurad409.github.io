@@ -732,6 +732,28 @@ p {
   }
 }
 
+/* Back Button Enhancement */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.8rem 1.8rem;
+            margin: 3rem 0 2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(130, 80, 223, 0.4);
+        }
+
 /* Ensure particles background scales properly */
 #particles-js {
   position: fixed;
