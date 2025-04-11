@@ -96,14 +96,27 @@ p {
   border-color: var(--accent);
 }
 
-/* Navigation */
+/* Fixed Navigation Bar */
+.fixed-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(var(--bg-primary-rgb), 0.85);
+  border-bottom: 1px solid var(--border-primary);
+  padding: 0.5rem 1rem;
+}
+
 .gh-nav {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 0.5rem;
-  padding: 1rem 0;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
+  max-width: 1200px;
+  margin: 0 auto;
   flex-wrap: wrap;
 }
 
@@ -120,7 +133,8 @@ p {
   transition: var(--transition);
 }
 
-.gh-nav-item:hover, .gh-nav-item.active {
+.gh-nav-item:hover, 
+.gh-nav-item.active {
   color: var(--text-primary);
   background-color: var(--bg-tertiary);
 }
@@ -128,6 +142,51 @@ p {
 .gh-nav-item.active {
   color: var(--accent);
   font-weight: 600;
+}
+
+/* Theme Toggle in Navbar */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  border-radius: 6px;
+  transition: var(--transition);
+}
+
+.theme-toggle:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+}
+
+/* Adjust container to account for fixed navbar */
+.container {
+  margin-top: 70px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .gh-nav {
+    justify-content: flex-start;
+    gap: 0.25rem;
+  }
+  
+  .gh-nav-item {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+  
+  .theme-toggle {
+    margin-left: 0;
+    padding: 0.5rem;
+  }
+  
+  .container {
+    margin-top: 90px;
+  }
 }
 
 /* Cards & Content */
