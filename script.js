@@ -17,26 +17,18 @@ themeToggle.addEventListener("click", () => {
 const savedTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 setTheme(savedTheme === "dark");
 
-// Mobile Navigation
-const menuToggle = document.createElement("button");
-menuToggle.classList.add("mobile-menu-toggle");
-menuToggle.innerHTML = '<span class="octicon octicon-three-bars"></span>';
-menuToggle.setAttribute("aria-label", "Toggle menu");
-document.body.prepend(menuToggle);
+// Mobile menu toggle
+const mobileMenuButton = document.getElementById('mobileMenuButton');
+const mainNav = document.getElementById('mainNav');
 
-const nav = document.querySelector(".gh-nav");
-menuToggle.addEventListener("click", () => {
-  nav.classList.toggle("open");
-  menuToggle.innerHTML = nav.classList.contains("open") 
-    ? '<span class="octicon octicon-x"></span>' 
-    : '<span class="octicon octicon-three-bars"></span>';
+mobileMenuButton.addEventListener('click', () => {
+  mainNav.classList.toggle('active');
 });
 
-// Close mobile menu when clicking outside
-document.addEventListener("click", (e) => {
-  if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
-    nav.classList.remove("open");
-    menuToggle.innerHTML = '<span class="octicon octicon-three-bars"></span>';
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+  if (!mainNav.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+    mainNav.classList.remove('active');
   }
 });
 
