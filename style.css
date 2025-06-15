@@ -110,6 +110,16 @@ p {
   padding: 0.5rem 1rem;
 }
 
+.mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
 .gh-nav {
   display: flex;
   justify-content: center;
@@ -133,15 +143,61 @@ p {
   transition: var(--transition);
 }
 
-.gh-nav-item:hover, 
-.gh-nav-item.active {
-  color: var(--text-primary);
-  background-color: var(--bg-tertiary);
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  border-radius: 6px;
+  transition: var(--transition);
 }
 
-.gh-nav-item.active {
-  color: var(--accent);
-  font-weight: 600;
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .mobile-menu-button {
+    display: block;
+    position: absolute;
+    right: 1rem;
+    top: 0.5rem;
+  }
+  
+  .gh-nav {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(var(--bg-primary-rgb), 0.95);
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-primary);
+    gap: 0.5rem;
+  }
+  
+  .gh-nav.active {
+    display: flex;
+  }
+  
+  .gh-nav-item {
+    width: 100%;
+    padding: 0.75rem 1rem;
+  }
+  
+  .theme-toggle {
+    margin-left: 0;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--border-primary);
+    margin-top: 0.5rem;
+  }
+  
+  .container {
+    margin-top: 60px;
+  }
 }
 
 /* Theme Toggle in Navbar */
@@ -733,26 +789,26 @@ p {
 }
 
 /* Back Button Enhancement */
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 0.8rem 1.8rem;
-            margin: 3rem 0 2rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.8rem 1.8rem;
+  margin: 3rem 0 2rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
 
-        .back-button:hover {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-            box-shadow: 0 0 15px rgba(130, 80, 223, 0.4);
-        }
+.back-button:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(130, 80, 223, 0.4);
+}
 
 /* Ensure particles background scales properly */
 #particles-js {
